@@ -1,9 +1,12 @@
 const sqlite3 = require("sqlite3").verbose();
+const cors = require('cors'); 
 var express = require("express");
+
+
 const port = process.env.PORT || 3000
 var app = express();
 app.use(express.json());
-
+app.use(cors());
 
 
 // db.run("CREATE TABLE wwords(id , word)");
