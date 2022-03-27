@@ -59,8 +59,8 @@ module.exports = function(app){
         })
         const { id } = req.body;
         const { word } = req.body;
-        const sql = `UPDATE wwords SET word = ${word} where id = ${id}`;
-        db.run(sql,[uid,word],(err)=>{
+        const sql = `UPDATE wwords SET word = ${word} where id = ?`;
+        db.run(sql,[id],(err)=>{
             if(err) return console.error(err.message);
             
             res.send({rc:{returnCode:0,errorMessage:""}});
@@ -81,8 +81,8 @@ module.exports = function(app){
             console.log("connecton successfull")
         })
         const { id } = req.body;
-        const sql = `DELETE from wwords where id = ${id}`;
-        db.run(sql,[uid,word],(err)=>{
+        const sql = `DELETE from wwords where id = ?`;
+        db.run(sql,[id],(err)=>{
             if(err) return console.error(err.message);
             
             res.send({rc:{returnCode:0,errorMessage:""}});
