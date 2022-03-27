@@ -1,6 +1,6 @@
 const sqlite3 = require("sqlite3").verbose();
 var express = require("express");
-
+const port = process.env.PORT || 3000
 var app = express();
 app.use(express.json());
 
@@ -20,6 +20,6 @@ app.use(express.json());
 
 require("./routes")(app);
 
-app.listen(8000,function(req,res){
-    console.log("App running at 8000")
+app.listen(port,function(req,res){
+    console.log("App running")
 })
