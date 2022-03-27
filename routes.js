@@ -58,9 +58,10 @@ module.exports = function(app){
             console.log("connecton successfull")
         })
         const { id } = req.body;
-        const { word } = req.body;
-        const sql = `UPDATE wwords SET word = ${word} where id = ?`;
-        db.run(sql,[id],(err)=>{
+        const words = req.body.word;
+
+        const sql = `UPDATE wwords SET word = ? where id = ?`;
+        db.run(sql,[words,id],(err)=>{
             if(err) return console.error(err.message);
             
             res.send({rc:{returnCode:0,errorMessage:""}});
