@@ -32,8 +32,58 @@ module.exports = function(app){
             console.log("connecton successfull")
         })
         const uid = uuidv4();
+        
+        console.log(uid)
         const { word } = req.body;
+        console.log(word);
         const sql = `INSERT INTO wwords(id, word) VALUES(?,?)`;
+        db.run(sql,[uid,word],(err)=>{
+            if(err) return console.error(err.message);
+            
+            res.send({rc:{returnCode:0,errorMessage:""}});
+            res.end();
+        });
+
+
+
+        db.close((err)=>{
+            if(err) return console.error(err.message);
+        });
+    })
+
+
+    app.post("/update",function(req,res){
+        const db = new sqlite3.Database("words.db",sqlite3.OPEN_READWRITE,(err)=>{
+            if(err) return console.error(err.message);
+            console.log("connecton successfull")
+        })
+        const { id } = req.body;
+        const { word } = req.body;
+        console.log(word);
+        const sql = `UPDATE wwords SET word = ${word} where id = ${id}`;
+        db.run(sql,[uid,word],(err)=>{
+            if(err) return console.error(err.message);
+            
+            res.send({rc:{returnCode:0,errorMessage:""}});
+            res.end();
+        });
+
+
+
+        db.close((err)=>{
+            if(err) return console.error(err.message);
+        });
+    })
+
+
+    app.post("/delete",function(req,res){
+        const db = new sqlite3.Database("words.db",sqlite3.OPEN_READWRITE,(err)=>{
+            if(err) return console.error(err.message);
+            console.log("connecton successfull")
+        })
+        const { id } = req.body;
+        console.log(word);
+        const sql = `DELETE from wwords where id = ${id}`;
         db.run(sql,[uid,word],(err)=>{
             if(err) return console.error(err.message);
             
